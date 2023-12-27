@@ -1,0 +1,26 @@
+<view a:if="{{ showError }}" class="pfs-popup-error-container">
+  <view class="pfs-popup-child-error-{{showError}}">
+     
+    <image mode="scaleToFill" onTap='closeError' class="pfs-icon-close-error" src="/main/ui/assets/images/cerrar-x-black.svg" />
+
+    <view class="pfs-popup-error-content">
+
+      <!-- Seccion de icono de la x circular -->
+      <image class="pfs-icon-red-error-popup" mode="scaleToFill" src="/main/ui/assets/images/circle-red.svg" />
+
+      <!-- Seccion del contenido del popup-->
+      <view class="pfs-description-error-service">
+        {{ mensaje ? mensaje : "Estamos presentando fallas en el Servicio, intentalo mas tarde" }}
+      </view>
+
+      <!-- Seccion del contenido del popup-->
+      <button class="pfs-button-accept-error" onTap="acceptError">
+        Aceptar
+      </button>
+
+
+    </view>
+
+
+  </view>
+</view>

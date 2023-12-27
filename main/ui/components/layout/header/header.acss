@@ -1,0 +1,4 @@
+.bannerClaroPay {
+  height: 80px;
+  background: transparent linear-gradient(110deg, #E03224 0%, #AC1422 100%) 0% 0% no-repeat padding-box;
+}

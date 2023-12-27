@@ -1,23 +1,26 @@
+button{
+  font-size: 16px;
+  font-family: 'Roboto';
+}
+
 button.primary-color {
   background-color: #DA291C;
-  border-radius: 6px;
+  border-radius: 100px;
   color: white;
-  font-weight: 600;
+  border: none;
 }
 
 button.primary-color-outline {
   background-color: #fff;
   border: 1px solid #DA291C !important;
-  border-radius: 6px;
+  border-radius: 100px;
   color: #DA291C;
-  font-weight: 600;
 }
 
 button.grey-color {
   background-color: #969696;
-  border-radius: 6px;
+  border-radius: 100px;
   color: white;
-  font-weight: 600;
 }
 
 .submitFormActions {
@@ -38,4 +41,9 @@ button.invalid {
 
 button.submit.disabled {
   background-color: #0000004D;
+}
+
+.button-actions{
+  width: 100%;
+  font-weight: 100;
 }

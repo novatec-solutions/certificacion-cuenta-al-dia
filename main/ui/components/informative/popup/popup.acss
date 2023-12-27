@@ -1,0 +1,39 @@
+.am-popup-content {
+  position: fixed;
+}
+
+.am-popup-mask {
+  visibility: hidden;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  opacity: 0;
+  background-color: #0000006b !important;
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+}
+
+.am-popup-bottom {
+  bottom: 0;
+  width: 100vw;
+  transform: translateY(100%);
+}
+
+.am-popup-show .am-popup-content {
+  transform: none;
+}
+
+.am-popup-show .am-popup-mask {
+  visibility: visible;
+  opacity: 1;
+}
+
+.am-popup .animation .am-popup-content {
+  transition: all 200ms linear;
+}
+
+.am-popup .animation .am-popup-mask {
+  transition: all 200ms linear;
+}

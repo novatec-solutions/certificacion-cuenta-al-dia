@@ -1,29 +1,76 @@
 @import './../../styles/button.acss';
 
-
-page {
-  display: flex;
-  flex-direction: column;
+.page-manage{
+  position: relative;
+  height: 90vh;
 }
 
 .page-manage .manage{
   display: flex;
   flex-direction: column;
+  align-items: center;
   flex: 1;
   opacity: 1;
   padding-left: 16px;
   padding-right: 15px;
   padding-top: 32px;
+  height: 100%;
+}
+
+.footer{
+  box-shadow: -3px -3px 6px #00000029;
+  border-radius: 10px 10px 0px 0px;
+  padding: 16px 0 20px;
+  max-height: 100px;
+  position: absolute;
+  z-index: 1;
+  bottom: 0;
+  width: 100%;
+}
+
+.footer .blue-text{
+  text-align: center;
+  font: normal normal medium 14px/18px Roboto;
+  letter-spacing: 0px;
+  color: #187385;
+  margin-bottom: 10px;
+}
+
+.footer .footerButtons{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  gap: 20px;
+}
+
+.footer .footerButtons button{
+  width: 162px;
+  height: 40px;
+  line-height: 40px;
 }
 
 .page-manage .manage .title{
-  font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-bold) var(--unnamed-font-size-20)/var(--unnamed-line-spacing-30) var(--unnamed-font-family-amx);
-  letter-spacing: var(--unnamed-character-spacing-0);
-  color: var(--c80-404040);
+  font: normal normal bold 20px/24px AMX;
+  letter-spacing: 0px;
+  color: #404040;
+  margin-bottom: 10px;
+}
+
+.page-manage .manage .user-name{
+  font: normal normal medium 16px/20px Roboto;
+  letter-spacing: 0px;
+  color: #187385;
+  margin-bottom: 24px;
+}
+
+.page-manage .manage .subtitle{
   text-align: center;
-  opacity: 1;
-  width: 100%;
-  height: 20px;
+  font: normal normal normal 14px/20px Roboto;
+  letter-spacing: 0px;
+  color: #404040;
+  margin-bottom: 25px;
 }
 
 .page-manage .manage .options{
@@ -31,20 +78,19 @@ page {
   flex-direction: row;
   justify-content:space-between;
   gap: 32px;
-  margin-top: 40px;
-  margin-left: 100px;
-  margin-right: 100px;
+  margin-left: 25%;
+  margin-right: 25%;
   text-align: center;
   letter-spacing: 0px;
   opacity: 1;
-  height: 26px;
+  height: 60px;
 }
 
 .page-manage .manage .options .button{
   align-items: center;
   display: flex;
   font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-bold) var(--unnamed-font-size-14)/21px var(--unnamed-font-family-amx);
-  height: 32px;
+  height: 60px;
   justify-content: center;
   letter-spacing: var(--unnamed-character-spacing-0);
   padding: 0 8px;
@@ -66,69 +112,103 @@ page {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  margin-top: 36px;
+  margin-top: 20px;
+  width: 100%;
+  align-items: center;
+  height: 60%;
+  padding: 15px 0;
+}
+
+.page-manage .manage  .button-detail-list .activate{
+  background: #FFFFFF 0% 0% no-repeat padding-box;
+  box-shadow: 0px 0px 15px -3px #33d09b;
+  border-radius: 10px;
+  border: 1px solid #33D09B;
 }
 
 .page-manage .manage .button-detail{
   width: 100%;
-  height: 64px;
-  background: var(--ffffff-tarj-fondo-fdfdff) 0% 0% no-repeat padding-box;
-  box-shadow: 2px 2px 10px var(--sombreados-2f2f60);
+  box-shadow: 0px 2px 6px 1px #00000029;
   border-radius: 10px;
+  background: #FFFFFF 0% 0% no-repeat padding-box;
   opacity: 1;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  padding-right: 16px;
-  padding-left: 16px;
+  padding: 16px 16px 12px;
+  gap: 16px;
+  margin-bottom: 10px;
+}
+
+.page-manage .manage .button-detail .content{
+  width: 100%;
+}
+
+.page-manage .manage .button-detail .row-space{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 4px;
+}
+
+.page-manage .manage .button-detail .row-space .boldText{
+  font: normal normal bold 14px/18px Roboto;
+  letter-spacing: 0px;
+  color: #404040;
+  opacity: 1;
 }
 
 .page-manage .manage .button-detail .text{
-  font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-bold) var(--unnamed-font-size-16)/19px var(--unnamed-font-family-roboto);
-  letter-spacing: var(--unnamed-character-spacing-0);
-  color: var(--c80-404040);
-  text-align: left;
-  opacity: 1;
+  font: normal normal normal 14px/18px Roboto;
+  letter-spacing: 0px;
+  color: #404040;
 }
 
-.page-manage .manage .button-detail .detail{
+.page-manage .manage .button-detail .row-space .red{
+  color: #DA291C;
+}
+
+.page-manage .manage .button-detail .row-space .green{
+  color: #0BB07B;
+}
+
+.modal-two-actions{
   display: flex;
-  flex-direction: row;
-}
-
-.page-manage .manage .button-detail .detail .text{
-  text-decoration: var(--unnamed-decoration-underline);
-  font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-medium) var(--unnamed-font-size-14)/var(--unnamed-line-spacing-17) var(--unnamed-font-family-roboto);
-  letter-spacing: var(--unnamed-character-spacing-0);
-  color: var(--azul-base-100-187385);
-  text-align: left;
-  opacity: 1;
-}
-
-.page-manage .manage .button-detail .detail .image{
-  width: 8px;
-  height: 14px;
-  opacity: 1;
-  margin-top: 3px;
-  margin-left: 5px;
-}
-
-.close_bttn {
+  flex-direction: column;
   align-items: center;
-  background-color: #E03224;
-  bottom: 5%;
-  right: 5%;
-  border: none;
-  border-radius: 8px;
-  display: flex;
-  height: 40px;
-  justify-content: center;
-  margin-bottom: 50px;
-  position: absolute;
-  width: 54px;
+  gap: 16px;
 }
 
-.close_bttn image{
-  height: 26px;
+.buttonDisabled-outline{
+  border: 1px solid #B3B3B3;
+  border-radius: 100px;
+  color: #B3B3B3;
+  font: normal normal medium 16px/19px Roboto;
+}
+
+.buttonDisabled{
+  background-color: #B3B3B3 !important;
+  border-radius: 100px;
+  color: white !important;
+  border: none;
+  font: normal normal medium 16px/19px Roboto;
+}
+
+.mb4{
+  margin-bottom: 4px;
+}
+
+.mt24{
+  margin-top: 24px;
+}
+
+.title-detail{
+  width: 95%;
+  text-align: left;
+  font: normal normal bold 16px/20px AMX;
+  letter-spacing: 0px;
+  color: #404040;
+  margin-bottom: 16px;
 }

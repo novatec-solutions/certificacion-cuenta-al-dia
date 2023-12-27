@@ -1,0 +1,50 @@
+
+.splash-loader-wrapper {
+  display: block;
+  position: relative;
+  z-index: 2;
+}
+.loader {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-8);
+  place-content: center;
+  place-items: center;
+  width: 100%;
+  height: 100vh;
+}
+
+.text-loader{
+  justify-content: center;
+  align-items: center;
+  color: #404040;
+  font-weight: bold;
+  font-family: 'AMX';
+  font-size: 20px;
+  text-align: center;
+}
+
+.splash-loader-wrapper .am-popup-content{
+  background-color: white;
+  height: 100vh;
+}
+
+.loader {
+  background-color: white !important;
+  height: 100vh;
+  width: 90%;
+  margin: auto;
+}
+
+.splash-loader {
+  width: 100%;
+}
+
+.splash-loader .am-modal-body {
+  max-width: unset;
+}
+
+image{
+  width: 130px;
+  height: 130px;
+}

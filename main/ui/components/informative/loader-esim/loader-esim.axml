@@ -1,0 +1,12 @@
+<view class="splash-loader-wrapper">
+  <modal
+    class="splash-loader"
+    show="{{show}}"
+    animation="{{false}}"
+  >
+    <view class="loader">
+      <view class="text-loader">Estamos haciendo el cambio a eSIM Por favor, espera</view>
+      <image src="/main/ui/assets/home/loading-claro.gif" mode="widthFix"/>
+    </view>
+  </modal>
+</view>

@@ -70,7 +70,35 @@ class UserRepository {
     return userDatasourceLocal.setLocalLine(data);
   }
 
-}
+  /**
+   * @function homeAccountsRemote
+   * @description Esta función se emplea para obtener la lista de cuentas fijas.
+   * @param {string} data - contiene valores asociados a la información del usuario, necesario para el consumo del servicio
+   * @returns {Promise} Devuelve la informacion con la respuesta del servicio.
+  */
+  homeAccountsRemote(data) {
+    return userDatasourceRemote.homeAccounts(data);
+  }
 
+  /**
+   * @function postpagoAccountsRemote
+   * @description Esta función se emplea para obtener la lista de cuentas moviles.
+   * @param {string} data - contiene valores asociados a la información del usuario, necesario para el consumo del servicio
+   * @returns {Promise} Devuelve la informacion con la respuesta del servicio.
+  */
+  postpagoAccountsRemote(data) {
+    return userDatasourceRemote.postpagoAccounts(data);
+  }
+
+   /**
+   * @function getCertificateRemote
+   * @description Esta función se emplea para obtener la certificación al usuario de la cuenta seleccionada.
+   * @param {string} data - contiene valores asociados a la información del usuario, necesario para el consumo del servicio
+   * @returns {Promise} Devuelve la informacion con la respuesta del servicio.
+  */
+   getCertificateRemote(data) {
+    return userDatasourceRemote.getCertificate(data);
+  }
+}
 
 module.exports = UserRepository;

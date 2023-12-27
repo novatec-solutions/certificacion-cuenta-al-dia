@@ -61,17 +61,15 @@ Page({
   },
   onLoad() {
     this.setData({isLoading: true})
-
     const data = userViewModel.getUserLogged();
+    console.log("getUserLogged: ", data)
     // Comprobamos si hay data del usuario
     if (hasValue(data)) {
       my.redirectTo({
         url: '/main/ui/pages/manage/manage'
       })
-    } else {
-      this.setData({isLoading: false})
-    }
-    
+    } 
+    this.setData({isLoading: false})
   },
 
 });

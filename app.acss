@@ -121,3 +121,23 @@
   --unnamed-decoration-underline: underline;
 }
 
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 25px auto;
+  width: 65%;
+}
+
+.bold{
+  font-weight: bold;
+  margin: 0 5px;
+}
+
+.mt-16{
+  margin-top: 16px;
+}
+
+.mb-24{
+  margin-bottom: 24px;
+}

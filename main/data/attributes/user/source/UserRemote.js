@@ -3,6 +3,9 @@ const { getHeaders } = require("../../../../data/config/remote/utilsRequest");
 
 module.exports.loginUser = loginUser;
 module.exports.getInformationLine = getInformationLine;
+module.exports.homeAccounts = homeAccounts;
+module.exports.postpagoAccounts = postpagoAccounts;
+module.exports.getCertificate = getCertificate;
 
 const {user, dataHeaders, device } = require('../entities/types')
 
@@ -15,7 +18,6 @@ const {user, dataHeaders, device } = require('../entities/types')
  * @returns {Promise<user>} - Returns a promise that resolves user information
  */
 function loginUser(api, email, password) {
-
   return new Promise((resolve , reject) => {
     my.request({
       url: api + 'v1/soap/LoginUsuarioApp.json',
@@ -37,10 +39,12 @@ function loginUser(api, email, password) {
         'X-MC-DEVICE-ID':'apaBtkizNFNBZELjASE/HxysF2nkRUJ3EefWy9UX6y9Wz/iV/sRlb3y+yK8l1FTeogBA9lcLwkVLXFOtrzjTRwp8SGQ9BWh5+G2IeRbaEOMM04ocECda0jGTWwWVjeYC8LwH23SiRUbD73nbyAnMNfunzxeYvhCs/x2s9D+1y8I='
       },
       success: (result) => {
-        // respondera la información del servicio         
+        // respondera la información del servicio   
+        console.log("res-login: ", result)      
         resolve(result)
       },
       fail: (error) => {
+        console.log("error-login: ", error)
         // respondera la información del servicio  con su error
         reject(error)
       }
@@ -88,5 +92,146 @@ function getInformationLine(api, headers) {
       }
     });
   } )
-  
+}
+
+/**
+ * @function homeAccounts
+ * @description Con este servicio se obtiene el listado de cuentas fijas que ha tenido el usuario
+ * @param {String} api - Esta es la URL asociada al servicio "GetHogarCuAcBal"
+ * @param {string} data - contiene valores asociados a la información del usuario, necesario para el consumo del servicio
+ * @returns {Promise} - Cuando el servicio "GetHogarCuAcBal" se consume con datos correctos o incorrectos,
+ * devuelve una "Promesa" con el listado de cuentas fijas
+*/
+async function homeAccounts(api, data) {
+  let result = '';
+  let headers = {
+    "content-type": "application/json; charset=UTF-8",
+    "X-MC-LINE": data.AccountId,
+    "X-MC-LOB": data.LineOfBusiness,
+    "X-MC-MAIL": data.email,
+    "X-MC-SO": "android",
+
+    "X-MC-DEVICE-ID": "TcjMbY1VWHthdCqRU0V+JBuTFTwrDUVSMU21y/UgSDBk6TglSrdSVhztavTmygi7e7woaCQZLwqWiSiDYZTv3Y/g2o48I5U6ddFt3XEAP1fdfMrIs16YcMmeokmJXz+I645KqfL3vp66B3I7wfmPxASE9JJFvjvCxnQgbFRzRRg=",
+    "X-MC-USER-AGENT": "eyJpcCI6IjEyOC4xNDUuMTI5LjEiLCJ1c2VyQWdlbnQiOiJNaUNsYXJvQXBwLzAuMC4xIChYaWFvbWk7IDIxMDkxMTlERzsgXHUwMDNjYW5kcm9pZC8xMlx1MDAzZSkifQ==",
+    "X-SESSION-ID": data.token
+  }
+
+  try {
+      await my.request({
+          url: api + 'General/CertificadoPagos/GetHogarCuAcBal/',
+          method: 'POST',
+          headers: headers,
+          data: {
+            "data": {
+              "documento": data.document,
+              "tipoDocumento": data.typeDocument
+          }
+        },
+        }).then((response) => {
+          result = response;
+        })
+        .catch((response) => {
+          result = response;
+        });
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+
+  return result;
+}
+
+/**
+ * @function postpagoAccounts
+ * @description Con este servicio se obtiene el listado de cuentas moviles que ha tenido el usuario
+ * @param {String} api - Esta es la URL asociada al servicio "GetMovilCuAcBal"
+ * @param {string} data - contiene valores asociados a la información del usuario, necesario para el consumo del servicio
+ * @returns {Promise} - Cuando el servicio "GetMovilCuAcBal" se consume con datos correctos o incorrectos, devuelve una "Promesa" con el listado de cuentas moviles
+*/
+async function postpagoAccounts(api, data) {
+  let result = '';
+  let headers = {
+    "content-type": "application/json; charset=UTF-8",
+    "X-MC-LINE": data.AccountId,
+    "X-MC-LOB": data.LineOfBusiness,
+    "X-MC-MAIL": data.email,
+    "X-MC-SO": "android",
+
+    "X-MC-DEVICE-ID": "JH3SvD3BUgFnWxAso8eD/Op/ki+d/iwMGvIrR7QzxwNDX9qmfNWqP3I0Y9Xvq6MYH/aYOw/uoHPM1zPoOGDnfGLEA98TIDR1VB80r+5i6IitkEc8Z8a1hlJcK3fN3+ZVbiFanADlsBcQZu9pP8QfePJRITVZEmnq2a4QgTndM9I=",
+    "X-MC-USER-AGENT": "eyJpcCI6IjEwLjAuMi4xNSIsInVzZXJBZ2VudCI6Ik1pQ2xhcm9BcHAvMC4wLjEgKHNhbXN1bmc7IFNNLUc5ODhOOyBcdTAwM2NhbmRyb2lkLzcuMS4yXHUwMDNlKSJ9",
+    "X-SESSION-ID": data.token
+  }
+
+  try {
+      await my.request({
+          url: api + 'General/CertificadoPagos/GetMovilCuAcBal/',
+          method: 'POST',
+          headers: headers,
+          data: {
+           "data": {
+            "documento": data.document,
+            "tipoDocumento": data.typeDocument
+            }
+        },
+        }).then((response) => {
+          result = response;
+        })
+        .catch((response) => {
+          result = response;
+        });
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+
+  return result;
+}
+
+/**
+ * @function getCertificate
+ * @description Con este servicio se obtiene la certificación al usuario de la cuenta seleccionada
+ * @param {String} api - Esta es la URL asociada al servicio "GetCertification"
+ * @param {string} data - contiene valores asociados a la información del usuario, necesario para el consumo del servicio
+ * @returns {Promise} - Cuando el servicio "GetCertification" se consume con datos correctos o incorrectos,
+ * devuelve una "Promesa" con el pdf en Base64 del archivo para poderlo visualizar en la aplicación
+*/
+async function getCertificate(api, data) {
+  let result = '';
+  let headers = {
+    "content-type": "application/json; charset=UTF-8",
+    "X-MC-LINE": data.AccountId,
+    "X-MC-LOB": data.LineOfBusiness,
+    "X-MC-MAIL": data.email,
+    "X-MC-SO": "android",
+
+    "X-MC-DEVICE-ID": "JH3SvD3BUgFnWxAso8eD/Op/ki+d/iwMGvIrR7QzxwNDX9qmfNWqP3I0Y9Xvq6MYH/aYOw/uoHPM1zPoOGDnfGLEA98TIDR1VB80r+5i6IitkEc8Z8a1hlJcK3fN3+ZVbiFanADlsBcQZu9pP8QfePJRITVZEmnq2a4QgTndM9I=",
+    "X-MC-USER-AGENT": "eyJpcCI6IjEwLjAuMi4xNSIsInVzZXJBZ2VudCI6Ik1pQ2xhcm9BcHAvMC4wLjEgKHNhbXN1bmc7IFNNLUc5ODhOOyBcdTAwM2NhbmRyb2lkLzcuMS4yXHUwMDNlKSJ9",
+    "X-SESSION-ID": data.token
+  }
+
+  try {
+      await my.request({
+          url: api + 'General/CertificadoPagos/GetCertification/',
+          method: 'POST',
+          headers: headers,
+          data: {
+           "data": {
+            "documento": data.document,
+            "tipoDocumento": data.typeDocument,
+            "typeCertification": data.typeCertification,
+            "accountOrRefSelected": data.accountOrRefSelected
+            }
+        },
+        }).then((response) => {
+          result = response;
+        })
+        .catch((response) => {
+          result = response;
+        });
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+
+  return result;
 }

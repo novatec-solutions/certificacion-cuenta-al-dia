@@ -9,11 +9,13 @@
 }
 .am-modal-mask{
   /* background-color: #c8c8c8 !important; */
-  background-color: #00000033 !important;
+  background-color: #00000038 !important;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
 }
 
 .info-modal .am-modal-content{
-  padding: 16px;
+  padding: 16px 30px;
 }
 
 .info-modal .modal-content  .modal-image image{
@@ -23,20 +25,23 @@
 } 
 
 .info-modal .modal-content .modal-title {
+  line-height: 39px;
+  margin-bottom: 16px;
+  text-align: center;
+  font: normal normal bold 16px/20px Roboto;
+  letter-spacing: 0px;
   color: #404040;
-  font-family: 'AMX';
-  font-size: 16px;
-  font-weight: bold;
-  line-height: 20px;
-  margin-bottom: 8px;
+  opacity: 1;
 }
 
 .info-modal .modal-content .modal-text {
-  color: #404040;
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 16px;
   margin-bottom: 24px;
+  font: var(--unnamed-font-style-normal) normal normal 14px/18px Roboto;
+  letter-spacing: var(--unnamed-character-spacing-0);
+  text-align: center;
+  font: normal normal normal 14px/18px Roboto;
+  letter-spacing: 0px;
+  color: #404040;
 }
 
 .info-modal .modal-actions {
@@ -45,12 +50,14 @@
 }
 
 .info-modal .modal-actions button {
-  border-radius: 26px;
-  font-size: 16px;
-  font-weight: 500;
+  border-radius: 100px;
   line-height: 40px;
   height: 40px;
   min-width: 162px;
+  text-align: center;
+  font: normal normal medium 16px/19px Roboto;
+  letter-spacing: 0px;
+  opacity: 1;
 }
 
 .info-modal .modal-actions button.primary-color-outline {

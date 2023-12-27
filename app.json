@@ -1,11 +1,14 @@
 {
   "subPackageBuildType": "shared",
   "pages": [
-    "main/ui/pages/signUp/signUp",
-    "main/ui/pages/manage/manage",
-    "main/ui/pages/example/example"
+    
+    "main/ui/pages/manage/manage"
   ],
   "window": {
-    "titleBarColor": "FFFFFF"
+    "titleImage": "",
+    "titleBarColor": "black",
+    "transparentTitle": "always",
+    "defaultTitle": "",
+    "enableScrollBar": "YES"
   }
 }

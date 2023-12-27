@@ -1,45 +1,110 @@
+<header></header>
 <view class="page-manage">
   <view class="manage">
-    <text class="title">Selecciona</text>
+    <text class="title">Certificación cuenta al día</text>
+    <view class="user-name">Sr.(a). YONATHAN BUSTOS</view>
+    <view class="subtitle">Elige la cuenta de la que necesitas obtener tu certificación</view>
     <view class="options">
-      <view onTap="selectTab" data-tab="3" class="button {{typeAccountTab === '3' ? 'select' : ''}}">Postpago</view>
-      <view onTap="selectTab" data-tab="2" class="button {{typeAccountTab === '2' ? 'select' : ''}}">Prepago</view>
+      <view onTap="selectTab" data-tab="3" class="button {{typeAccountTab === '3' ? 'select' : ''}}">Cuenta Hogar</view>
+      <view onTap="selectTab" data-tab="2" class="button {{typeAccountTab === '2' ? 'select' : ''}}">Líneas Postpago</view>
     </view>
-    <view class="button-detail-list">
-      <view a:if="{{ typeAccountTab === '2' }}" a:for="{{ accountsType2 }}" class="button-detail" data-item="{{item}}" onTap="setAccountSelect">
-        <text class="text">{{item.alias}}</text>
-        <view class="detail">
-          <text class="text">Ver detalle</text>
-          <image class="image" mode="scaleToFill" src="/main/ui/assets/icons/icono-chevron-rigth-ppal.png" />
+    
+    <scroll-view scroll-y="{{true}}" scroll-into-view="15" onScroll="scroll" class="button-detail-list">
+      <view a:if="{{ typeAccountTab === '3' }}" style="width:95%;">
+        <view a:if="{{ homeAccountsAct.length }}" class="title-detail">Cuentas activas</view>
+        <view a:for="{{ homeAccountsAct }}" class="button-detail {{item.activate ? 'activate' : ''}}" data-item="{{item}}" onTap="setAccountHomeSelect">
+          <radio value="{{item}}" checked="{{item.activate}}" color="#33d09b"/>
+          <view class="content">
+            <view class="row-space">
+              <text class="boldText">N.° de cuenta:</text>
+              <text class="boldText">{{item.account}}</text>
+            </view>
+            <view class="text mb4">{{item.address}}</view>
+            <view class="row-space">
+              <text class="text">Estado actual:</text>
+              <text class="text {{item.state === 'Cuenta al día' ? 'green' : 'red'}}">{{item.state}}</text>
+            </view>
+          </view>
+        </view>
+        <view a:if="{{ homeAccountsDeac.length }}" class="title-detail mt24">Cuentas desactivadas</view>
+        <view a:for="{{ homeAccountsDeac }}" class="button-detail {{item.activate ? 'activate' : ''}}" data-item="{{item}}" onTap="setAccountHomeSelect">
+          <radio value="{{item}}" checked="{{item.activate}}" color="#33d09b"/>
+          <view class="content">
+            <view class="row-space">
+              <text class="boldText">N.° de cuenta:</text>
+              <text class="boldText">{{item.account}}</text>
+            </view>
+            <view class="text mb4">{{item.address}}</view>
+            <view class="row-space">
+              <text class="text">Estado actual:</text>
+              <text class="text {{item.state === 'Cuenta al día' ? 'green' : 'red'}}">{{item.state}}</text>
+            </view>
+          </view>
         </view>
       </view>
-      <view a:if="{{ typeAccountTab === '3' }}" class="button-detail" a:for="{{ accountsType3 }}" data-item="{{item}}" onTap="setAccountSelect">
-        <text class="text">{{item.alias}}</text>
-        <view class="detail">
-          <text class="text">Ver detalle</text>
-          <image class="image" mode="scaleToFill" src="/main/ui/assets/icons/icono-chevron-rigth-ppal.png" />
+      
+      <view a:if="{{ typeAccountTab === '2' }}" style="width:95%">
+        <view a:if="{{ postAccountsAct.length }}" class="title-detail">Líneas activas</view>
+        <view a:for="{{ postAccountsAct }}" class="button-detail {{item.activate ? 'activate' : ''}}" data-item="{{item}}" onTap="setAccountPostpagoSelect">
+          <radio value="{{item}}" checked="{{item.activate}}" color="#33d09b"/>
+          <view class="content">
+            <view class="row-space">
+              <text class="boldText">N.° de línea:</text>
+              <text class="boldText">{{item.numberLine}}</text>
+            </view>
+            <view class="row-space">
+              <text class="text">Referencia de pago:</text>
+              <text class="text">{{item.refPago}}</text>
+            </view>
+            <view class="row-space">
+              <text class="text">Estado actual:</text>
+              <text class="text {{item.state === 'Cuenta al día' ? 'green' : 'red'}}">{{item.state}}</text>
+            </view>
+          </view>
+        </view>
+        <view a:if="{{ postAccountsDeac.length }}" class="title-detail mt24">Líneas desactivadas</view>
+        <view a:for="{{ postAccountsDeac }}" class="button-detail {{item.activate ? 'activate' : ''}}" data-item="{{item}}" onTap="setAccountPostpagoSelect">
+          <radio value="{{item}}" checked="{{item.activate}}" color="#33d09b"/>
+          <view class="content">
+            <view class="row-space">
+              <text class="boldText">N.° de línea:</text>
+              <text class="boldText">{{item.numberLine}}</text>
+            </view>
+            <view class="row-space">
+              <text class="text">Referencia de pago:</text>
+              <text class="text">{{item.refPago}}</text>
+            </view>
+            <view class="row-space">
+              <text class="text">Estado actual:</text>
+              <text class="text {{item.state === 'Cuenta al día' ? 'green' : 'red'}}">{{item.state}}</text>
+            </view>
+          </view>
         </view>
       </view>
+    </scroll-view>
+  </view>
+  <view class="footer">
+    <view class="blue-text" a:if="{{selectedDocument}}">1 documento seleccionado</view>
+    <view class="footerButtons">
+      <button onTap="downloadCertificate" size="default" class="{{selectedDocument ? 'primary-color' : 'buttonDisabled'}}" disabled="{{!selectedDocument}}">Descargar</button>
+      <button onTap="sendCertificate" size="default" class="{{selectedDocument ? 'primary-color-outline' : 'buttonDisabled-outline'}}" disabled="{{!selectedDocument}}">Enviar</button>
     </view>
   </view>
-
-
-  <button size="default" onTap="startClearStorage" class="close_bttn" type="primary">
-    <image mode="aspectFit" src="/main/ui/assets/icons/logout.png" />
-  </button>
 </view>
 
 <loader-splash show="{{isLoading}}"></loader-splash>
 
-<modal atts="{{{show: modalError}}}">
+<modal atts="{{{show: showModal}}}">
   <view class="modal-content">
     <view class="modal-image">
-      <image mode="scaleToFill" src="/main/ui/assets/icons/alert-error.svg" />
+      <image mode="scaleToFill" src="/main/ui/assets/icons/alert-{{modalIcon}}.svg" />
     </view>
-    <view class="modal-title">Error</view>
-    <view class="modal-text">{{modalErrorMessage}}</view>
+    <view class="modal-title">{{modalTitle || 'Error'}}</view>
+    <view class="modal-text">{{modalMessage}}</view>
+    <view class="modal-text" a:if="{{ modalSecondaryMessage }}">{{modalSecondaryMessage}}</view>
   </view>
-  <view class="modal-actions">
-    <button onTap="closeModalError" size="default" class="primary-color">Aceptar</button>
+  <view class="modal-actions modal-two-actions">
+    <button onTap="closeModalPrimary" size="default" class="primary-color">{{modalBtnPrimary || 'Aceptar'}}</button>
+    <button onTap="closeModalOutline" a:if="{{ modalBtnOutline }}" size="default" class="primary-color-outline">{{modalBtnOutline}}</button>
   </view>
 </modal>

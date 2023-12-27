@@ -59,7 +59,7 @@
 .info-modal .modal-actions.two-actions {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 16px;
 }
 
 .info-modal .modal-actions.two-actions button {

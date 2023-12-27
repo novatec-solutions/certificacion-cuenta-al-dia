@@ -32,6 +32,17 @@ class UserDataSourceRemote {
     return userRemote.getInformationLine(api.URL_BASE.CLARO_LOGIN, data)
   }
 
+  homeAccounts(data){
+    return userRemote.homeAccounts(api.URL_BASE.CLARO_M3, data)
+  }
+
+  postpagoAccounts(data){
+    return userRemote.postpagoAccounts(api.URL_BASE.CLARO_M3, data)
+  }
+
+  getCertificate(data){
+    return userRemote.getCertificate(api.URL_BASE.CLARO_M3, data)
+  }
 }
 
 module.exports = UserDataSourceRemote

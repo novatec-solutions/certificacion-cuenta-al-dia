@@ -1,20 +1,12 @@
 Component({
   mixins: [],
-  props: {
-    atts: {
-      name: '',
-      icon: '', // info, error, success, warm
-      title: '',
-      text: '',
-      modalOpened: false
-    }
-  },
+  props: {},
   didMount() {},
   didUpdate() {},
   didUnmount() {},
   methods: {
-    closeModal() {
-      this.props.onConfirm(this.props.atts)
+    closeModal(data) {
+      this.props.onConfirm(data.target.dataset.item)
     }
   },
 });
