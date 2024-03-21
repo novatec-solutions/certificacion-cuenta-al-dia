@@ -86,7 +86,7 @@
   <view class="footer">
     <view class="blue-text" a:if="{{selectedDocument}}">1 documento seleccionado</view>
     <view class="footerButtons">
-      <button onTap="downloadCertificate" size="default" class="{{selectedDocument ? 'primary-color' : 'buttonDisabled'}}" disabled="{{!selectedDocument}}">Descargar</button>
+      <button onTap="descargarpdf" size="default" class="{{selectedDocument ? 'primary-color' : 'buttonDisabled'}}" disabled="{{!selectedDocument}}">Descargar</button>
       <button onTap="sendCertificate" size="default" class="{{selectedDocument ? 'primary-color-outline' : 'buttonDisabled-outline'}}" disabled="{{!selectedDocument}}">Enviar</button>
     </view>
   </view>
