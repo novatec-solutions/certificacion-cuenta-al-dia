@@ -1,9 +1,10 @@
 {
   "subPackageBuildType": "shared",
   "pages": [
-    
+   "main/ui/pages/signUp/signUp",
     "main/ui/pages/manage/manage"
   ],
+  "entryPagePath":"main/ui/pages/signUp/signUp",
   "window": {
     "titleImage": "",
     "titleBarColor": "black",

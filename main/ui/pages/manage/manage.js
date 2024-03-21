@@ -33,7 +33,7 @@ Page({
     if(homeAccounts.error === 0){
       homeAccounts.data.filter(x => {
         x.activate = false;
-        x.state = Number(x.field13) > 0 ? 'Saldo pendiente' : 'Cuenta al día';
+        x.state = Number(x.field13) > 0 ? 'Cuenta al día' : 'Saldo pendiente' ;
       })
       this.setData({
         accountsType3: homeAccounts.data,
@@ -169,6 +169,53 @@ Page({
           }
         });
     }    
+  },
+  descargarpdf() {
+    this.setData({ isLoading: true });
+    userViewModel.getCertificate(this.data.certificateLine)
+      .then((result) => {
+        console.log("respuesta", result.data);
+        if (result.data) {
+          my.call('MQJsApi4PreviewPDF', {
+            pdfBase64String: result.data
+          }).then((values) => {
+            my.alert({
+              content: JSON.stringify(values)
+            });
+            this.setData({ isLoading: false });
+          }).catch((error) => {
+            my.alert({
+              title: 'Error',
+              content: JSON.stringify(error)
+            });
+            this.setData({ isLoading: false });
+          });
+        } else {
+          this.setData({ showModal: true, isLoading: false });
+        }
+      })
+      .catch((error) => {
+        my.alert({
+          title: 'Error',
+          content: JSON.stringify(error)
+        });
+        this.setData({ isLoading: false });
+      });
+  },
+  MQJsApi4PreviewPDF2() {
+    console.log("descarga",this.data.base64)
+    my.call('MQJsApi4PreviewPDF',{
+      pdfBase64String: this.data.base64
+    }).then((values)=>{
+      my.alert({
+        content:JSON.stringify(values)
+      });
+    }).catch((value)=>{
+      my.alert({
+        title:'faile',
+        content:JSON.stringify(value)
+      });
+    })
   },
   sendCertificate(){}
 });
